@@ -21,3 +21,27 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::get('/', [PageController::class,'index']);
+
+
+
+Auth::routes();
+
+Route::get('/reservasi', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::post('/reservasi', [PageController::class, 'pesanKamar'])->middleware('verified');
+// Route::get('/penulis', 'PenulisController@index')->name('penulis.index');
+Auth::routes();
+
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    // route untuk kamarcontroller
+    Route::get('/admin/kamar', [KamarController::class, 'index']);
+    Route::get('/admin/kamar/create', [KamarController::class, 'create']);
+    Route::post('/admin/kamar/create', [KamarController::class, 'store']);
+    Route::get('/admin/kamar/{kamar}', [KamarController::class, 'edit']);
+    Route::put('/admin/kamar/{kamar}', [KamarController::class, 'update']);
+    Route::delete('/admin/kamar/{kamar}', [KamarController::class, 'destroy']);
+
+
+});
