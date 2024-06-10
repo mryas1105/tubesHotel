@@ -4,3 +4,6 @@
 use App\Http\Controllers\Admin\HomeController;
 
 
+admin.php
+
+Route::get('/', 'HomeController@index')->name('dashboard');
