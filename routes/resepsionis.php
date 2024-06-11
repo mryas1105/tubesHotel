@@ -4,3 +4,4 @@
 use App\Http\Controllers\Resepsionis\HomeController;
 
 
+Route::get('/', 'HomeController@index')->name('dashboard');
