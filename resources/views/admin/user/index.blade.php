@@ -27,27 +27,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $k)
+                                @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $k->name }}</td>
-                                        <td>{{ $k->email }}</td>
-                                        <td>{{ $k->roles->get(0)->name }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ optional($user->roles->first())->name ?? 'No Role' }}</td>
                                         <td>
-                                            {{-- <a class="btn btn-primary" href="/admin/user/{{ $k->id }}">Edit</a> --}}
-
-                                            <form method="POST" action="/admin/user/{{ $k->id }}">
+                                            <form method="POST" action="/admin/user/{{ $user->id }}">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger"
                                                     onclick="return confirm('Yakin akan menghapus data ini?')"
                                                     type="submit">Delete</button>
                                             </form>
-
-
                                         </td>
                                     </tr>
                                 @endforeach
+
                             </tbody>
                         </table>
                     </div>

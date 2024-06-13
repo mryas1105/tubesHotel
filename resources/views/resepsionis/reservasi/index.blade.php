@@ -12,7 +12,7 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-
+                        <a href="{{ route('reservasi.exportExcel') }}" class="btn btn-primary">Export Excel</a>
                         <table class="table">
                             <thead>
                                 <tr>

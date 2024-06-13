@@ -26,6 +26,8 @@ Route::get('/', [PageController::class, 'index']);
 
 
 Auth::routes();
+// getdata
+Route::get('/data/kamar', [KamarController::class, 'getData'])->name('kamar.data');
 
 Route::get('/reservasi', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 Route::post('/reservasi', [PageController::class, 'pesanKamar'])->middleware('verified');
@@ -33,7 +35,7 @@ Route::post('/reservasi', [PageController::class, 'pesanKamar'])->middleware('ve
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     // route untuk kamarcontroller
     Route::get('/admin/kamar', [KamarController::class, 'index']);
@@ -68,7 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/fasilitashotel/create', [FasilitasHotelController::class, 'store']);
     Route::get('/admin/fasilitashotel/{fasilitashotel}/edit', [FasilitasHotelController::class, 'edit']);
     Route::post('/admin/fasilitashotel/{fasilitashotel}', [FasilitasHotelController::class, 'update']);
-    Route::delete('/admin/fasilitashotel/{fasilitas_hotel}', [FasilitasHotelController::class, 'destroy']);
+    Route::delete('/admin/fasilitashotel/{fasilitas}', [FasilitasHotelController::class, 'destroy']);
 
 
     // fasilitas kamar
@@ -80,4 +82,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/fasilitas_kamar/{fasilitas_kamar}', [FasilitasKamarController::class, 'destroy']);
 
     Route::post('/status/{id}', [ReservasiController::class, 'status']);
+
+    Route::get('reservasi/exportExcel', [ReservasiController::class, 'exportExcel'])->name('reservasi.exportExcel');
 });

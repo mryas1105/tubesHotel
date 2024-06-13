@@ -37,7 +37,7 @@
                   <input type="submit" class="btn btn-success btn-block btn-lg" value="Login">
                 </div>
                 </form>
-                <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="{{ route('login') }}" class="fw-bold text-body"><u>Sign up here</u></a></p>
+                {{-- <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="{{ route('login') }}" class="fw-bold text-body"><u>Sign up here</u></a></p> --}}
 
 
             </div>

@@ -16,7 +16,7 @@
                             </div>
                         @endif
 
-                        <table class="table">
+                        <table class="table datatable" id="tabelKamar">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -57,4 +57,30 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<script>
+    $(function() {
+        $("#tabelKamar").DataTable({
+            serverSide: true,
+            processing: true,
+            ajax: "/data/kamar", // Perhatikan apakah route-nya sudah sesuai
+            columns: [
+                { data: "id", name: "id" , visible: false },
+                { data: "tipe_kamar", name: "tipe_kamar" },
+                { data: "jumlah_kamar", name: "jumlah_kamar" },
+                { data: "harga_kamar", name: "harga_kamar" },
+                { data: "gambar", name: "gambar" },
+            ],
+            order: [[0, "desc"]],
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, "All"]
+            ],
+        });
+    });
+</script>
 @endsection

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ReservasiExport;
 use App\Models\kamar;
 use App\Models\pemesanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Reservasi;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 
 class ReservasiController extends Controller
@@ -92,5 +95,10 @@ class ReservasiController extends Controller
         // }
 
         return redirect('resepsionis/reservasi');
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new ReservasiExport, 'reservasi.xlsx');
     }
 }

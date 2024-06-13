@@ -1,5 +1,5 @@
 @extends('admin.templates.default')
-    @section('title', 'Hotel Hebat | Fasilitas Hotel')
+@section('title', 'Hotel Hebat | Fasilitas Hotel')
 
 
 @section('content-header')
@@ -35,23 +35,23 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($fasilitas as $f)
+            @foreach ($fasilitashotel as $f)
+                <tr>
+                    <th scope="row">{{ $loop->iteration }}</th>
+                    <td>{{ $f->nama_fasilitas }}</td>
+                    <td>{{ $f->deskripsi_fasilitas }}</td>
+                    <td><img src="/storage/kamar/{{ $f->image }}" width="100px" alt=""></td>
+                    <td>
+                        <a href="/admin/fasilitashotel/{{ $f->id }}/edit" class="btn btn-success">Edit</a>
 
-            <tr>
-                <th scope="row">{{ $loop->iteration }}</th>
-                <td>{{ $f->nama_fasilitas }}</td>
-                <td>{{ $f->deskripsi_fasilitas }}</td>
-                <td><img src="/storage/kamar/{{ $f->image }}" width="100px" alt=""></td>
-                <td>
-                    <a href="/admin/fasilitashotel/{{ $f->id }}/edit" class="btn btn-success">Edit</a>
-
-                    <form action="/fasilitas-hotel/{{ $f->id }}" method="post" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
-            </tr>
+                        <form method="POST" action="/admin/fasilitashotel/{{ $f->id }}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" onclick="return confirm('Yakin akan menghapus data ini?')"
+                                type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
             @endforeach
 
         </tbody>
@@ -71,35 +71,39 @@
                 <div class="modal-body">
 
                     <form action="/admin/fasilitashotel/create" method="post" enctype="multipart/form-data">
-                    @csrf
+                        @csrf
 
-                    <div class="mb-3">
-                        <label for="nama_fasilitas" class="form-label">Nama Fasilitas</label>
-                        <input type="text" class="form-control @error('nama_fasilitas') is-invalid @enderror" id="nama_fasilitas" name="nama_fasilitas" placeholder="TV" value="{{ old('nama_fasilitas') }}">
-                        @error('nama_fasilitas')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+                        <div class="mb-3">
+                            <label for="nama_fasilitas" class="form-label">Nama Fasilitas</label>
+                            <input type="text" class="form-control @error('nama_fasilitas') is-invalid @enderror"
+                                id="nama_fasilitas" name="nama_fasilitas" placeholder="TV"
+                                value="{{ old('nama_fasilitas') }}">
+                            @error('nama_fasilitas')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="keterangan" class="form-label">Keterangan</label>
-                        <input type="text" class="form-control @error('nama_fasilitas') is-invalid @enderror" id="keterangan" name="keterangan" placeholder="Keterangan" value="{{ old('keterangan') }}">
-                        @error('keterangan')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+                        <div class="mb-3">
+                            <label for="keterangan" class="form-label">Keterangan</label>
+                            <input type="text" class="form-control @error('nama_fasilitas') is-invalid @enderror"
+                                id="keterangan" name="keterangan" placeholder="Keterangan" value="{{ old('keterangan') }}">
+                            @error('keterangan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
-                        <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image">
-                        @error('image')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input class="form-control @error('image') is-invalid @enderror" type="file" id="image"
+                                name="image">
+                            @error('image')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                        @enderror
-                    </div>
 
 
                 </div>

@@ -77,4 +77,11 @@ class KamarController extends Controller
         $kamar->delete();
         return redirect('/admin/kamar')->with('success', 'Berhasil hapus kamar!');
     }
+
+    public function getData(Request $request)
+    {
+        $kamars = Kamar::select(['id', 'tipe_kamar', 'harga_kamar', 'gambar', 'jumlah_kamar']);
+
+        return datatables()->of($kamars)->toJson();
+    }
 }
