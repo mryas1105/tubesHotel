@@ -41,7 +41,9 @@ class PageController extends Controller
         $reservasi->kamar_id = $request->tipe_kamar;
         $reservasi->status = 'Booking';
         $reservasi->save();
-        return redirect('/reservasi');
+
+        return redirect('/reservasi')->with('success', 'Berhasil reservasi!');
+        // return redirect('/reservasi');
     }
 }
 

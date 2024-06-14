@@ -44,9 +44,10 @@ div {
 
 
 @include('user.templates.partials.head')
-
+?
+{{--  --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
-
   <!-- ======= Header ======= -->
   <header id="header" class="d-flex align-items-center ">
     <div class="container-fluid container-xxl d-flex align-items-center">
@@ -137,6 +138,119 @@ div {
 
   <!-- script -->
   @include('user.templates.partials.scripts')
+  {{-- Notifikasi setelah penghapusan --}}
+<script>
+    function simpanForm() {
+        console.log("Simpan Form Successs ");
+
+        // sweet alert notif reset
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 13000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "success",
+            title: 'Berhasil Menambahkan Barang'
+        });
+    };
+</script>
+{{-- end simpan barang --}}
+
+<script>
+    // gawe reset form
+    function resetForm() {
+        console.log("Form Reset Successs ");
+        document.getElementById("nama_produk").value = '';
+        document.getElementById("kategori_id").value = '';
+        document.getElementById("harga").value = '';
+        document.getElementById("deskripsi").value = '';
+
+        // sweet alert notif reset
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "success",
+            title: 'Berhasil di Reset'
+        });
+    };
+</script>
+
+{{-- gawe notif gagal --}}
+@if ($message = Session::get('success'))
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "success",
+            title: '{{ $message }}'
+        });
+    </script>
+@endif
+{{-- gawe notif sukses --}}
+@if ($message = Session::get('success'))
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "success",
+            title: 'test'
+        });
+    </script>
+    <script>
+        // Ambil elemen modal
+        var modal = document.getElementById('modal-tambahData');
+
+        // Tangkap event submit form
+        var form = document.querySelector('form');
+        form.addEventListener('submit', function(event) {
+            // Lakukan validasi formulir di sini
+            if (!form.checkValidity()) {
+                // Jika validasi gagal, hentikan aksi default
+                event.preventDefault();
+                // Tampilkan modal
+                var modal = new bootstrap.Modal(document.getElementById('modal-tambahData'));
+                modal.show();
+            }
+        });
+    </script>
+
+
+    {{-- test --}}
+@endif
 </body>
 
 
