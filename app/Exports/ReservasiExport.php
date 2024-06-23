@@ -17,7 +17,7 @@ class ReservasiExport implements FromView, WithStyles, ShouldAutoSize
             1 => ['font' => ['bold' => true]],
         ];
     }
-
+ 
     public function view(): View
     {
         return view('resepsionis.reservasi.export_excel', [
